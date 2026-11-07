@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/theme/app_theme.dart';
-import 'features/home/presentation/home_screen.dart';
+import 'features/app/presentation/app_shell.dart';
 
 void main() {
   runApp(const BodimaApp());
@@ -18,7 +18,7 @@ class BodimaApp extends StatelessWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.system,
-      home: const HomeScreen(),
+      home: const AppShell(),
     );
   }
 }

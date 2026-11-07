@@ -8,7 +8,16 @@ import 'widgets/location_chips.dart';
 import 'widgets/search_box.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({
+    this.onListingTap,
+    this.onExploreTap,
+    this.onProfileTap,
+    super.key,
+  });
+
+  final ValueChanged<BoardingListing>? onListingTap;
+  final VoidCallback? onExploreTap;
+  final VoidCallback? onProfileTap;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -16,10 +25,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _searchController = TextEditingController();
-  final _locations = ['Malabe', 'Kaduwela', 'Thalahena', 'Battaramulla', 'Hokandara'];
+  final _locations = [
+    'Malabe',
+    'Kaduwela',
+    'Thalahena',
+    'Battaramulla',
+    'Hokandara'
+  ];
   final Set<String> _favorites = {};
   String _selectedLocation = 'Malabe';
-  int _currentDestination = 0;
 
   @override
   void dispose() {
@@ -39,16 +53,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const BodimaHeader(),
+                    BodimaHeader(onProfileTap: widget.onProfileTap),
                     const SizedBox(height: 28),
                     Text('Hello, welcome! 👋',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppColors.teal,
-                              fontWeight: FontWeight.w700,
-                            )),
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: AppColors.teal,
+                                  fontWeight: FontWeight.w700,
+                                )),
                     const SizedBox(height: 8),
                     Text('Find your perfect\nboarding place.',
-                        style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineMedium
+                            ?.copyWith(
                               color: Theme.of(context).colorScheme.onSurface,
                               fontWeight: FontWeight.w800,
                               height: 1.12,
@@ -70,7 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           setState(() => _selectedLocation = location),
                     ),
                     const SizedBox(height: 28),
-                    _sectionHeader(context, 'Featured boardings', showAction: true),
+                    _sectionHeader(context, 'Featured boardings',
+                        showAction: true),
                     const SizedBox(height: 12),
                   ],
                 ),
@@ -88,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     final listing = sampleBoardings[index];
                     return BoardingCard(
                       listing: listing,
+                      onTap: () => widget.onListingTap?.call(listing),
                       isFavorite: _favorites.contains(listing.name),
                       onFavoriteChanged: () => setState(() {
                         if (!_favorites.add(listing.name)) {
@@ -102,27 +122,6 @@ class _HomeScreenState extends State<HomeScreen> {
             const SliverToBoxAdapter(child: SizedBox(height: 20)),
           ],
         ),
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _currentDestination,
-        onDestinationSelected: (index) {
-          setState(() => _currentDestination = index);
-          if (index != 0) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  '${['Home', 'Explore', 'Saved', 'Profile'][index]} is coming soon',
-                ),
-              ),
-            );
-          }
-        },
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home_rounded), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.explore_outlined), selectedIcon: Icon(Icons.explore_rounded), label: 'Explore'),
-          NavigationDestination(icon: Icon(Icons.favorite_border_rounded), selectedIcon: Icon(Icons.favorite_rounded), label: 'Saved'),
-          NavigationDestination(icon: Icon(Icons.person_outline_rounded), selectedIcon: Icon(Icons.person_rounded), label: 'Profile'),
-        ],
       ),
     );
   }
@@ -139,9 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
         const Spacer(),
         if (showAction)
           TextButton(
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('All boardings are coming soon')),
-            ),
+            onPressed: widget.onExploreTap,
             child: const Text('View all'),
           ),
       ],

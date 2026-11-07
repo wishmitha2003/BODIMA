@@ -48,8 +48,7 @@ abstract final class AppTheme {
         elevation: 8,
         height: 70,
         backgroundColor: isDark ? const Color(0xFF101A26) : Colors.white,
-        indicatorColor:
-            isDark ? const Color(0xFF15463F) : AppColors.paleTeal,
+        indicatorColor: isDark ? const Color(0xFF15463F) : AppColors.paleTeal,
         labelTextStyle: WidgetStatePropertyAll(
           TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
         ),
