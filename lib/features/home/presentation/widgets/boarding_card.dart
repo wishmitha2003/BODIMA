@@ -23,7 +23,8 @@ class BoardingCard extends StatelessWidget {
       width: 250,
       child: Card(
         clipBehavior: Clip.antiAlias,
-        elevation: 0,
+        elevation: 2,
+        shadowColor: Colors.black.withValues(alpha: .08),
         child: InkWell(
           onTap: onTap,
           child: Column(
@@ -32,7 +33,7 @@ class BoardingCard extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    height: 135,
+                    height: 145,
                     width: double.infinity,
                     color: Color(listing.imageColor),
                     child: Icon(
@@ -121,6 +122,7 @@ class BoardingCard extends StatelessWidget {
                       '${listing.price}/month',
                       style: const TextStyle(
                         color: AppColors.teal,
+                        fontSize: 16,
                         fontWeight: FontWeight.w800,
                       ),
                     ),

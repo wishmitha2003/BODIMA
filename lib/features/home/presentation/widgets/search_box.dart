@@ -13,6 +13,7 @@ class SearchBox extends StatelessWidget {
       decoration: InputDecoration(
         hintText: 'Search by location or boarding name',
         prefixIcon: const Icon(Icons.search_rounded),
+        suffixIconColor: Theme.of(context).colorScheme.primary,
         suffixIcon: IconButton(
           tooltip: 'Filter',
           onPressed: () => ScaffoldMessenger.of(context).showSnackBar(

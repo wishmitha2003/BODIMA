@@ -27,6 +27,7 @@ class LocationChips extends StatelessWidget {
             selected: location == selectedLocation,
             onSelected: (_) => onSelected(location),
             showCheckmark: false,
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           );
         },
       ),
