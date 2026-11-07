@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/theme/app_theme.dart';
-
 class BodimaHeader extends StatelessWidget {
   const BodimaHeader({this.onProfileTap, super.key});
 
@@ -14,7 +12,7 @@ class BodimaHeader extends StatelessWidget {
         Text(
           'BODIMA',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.navy,
+                color: Theme.of(context).colorScheme.primary,
                 fontWeight: FontWeight.w800,
                 letterSpacing: 1.2,
               ),
