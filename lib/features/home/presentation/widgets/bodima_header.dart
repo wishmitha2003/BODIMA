@@ -3,23 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/theme/app_theme.dart';
 
 class BodimaHeader extends StatelessWidget {
-  const BodimaHeader({super.key});
+  const BodimaHeader({this.onProfileTap, super.key});
+
+  final VoidCallback? onProfileTap;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 40,
-          height: 40,
-          decoration: BoxDecoration(
-            color: AppColors.navy,
-            borderRadius: BorderRadius.circular(13),
-          ),
-          alignment: Alignment.center,
-          child: const Icon(Icons.home_rounded, color: Colors.white, size: 23),
-        ),
-        const SizedBox(width: 10),
         Text(
           'BODIMA',
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -36,7 +27,7 @@ class BodimaHeader extends StatelessWidget {
         ),
         IconButton(
           tooltip: 'Profile',
-          onPressed: () => _showMessage(context, 'Profile is coming soon'),
+          onPressed: onProfileTap,
           icon: const Icon(Icons.account_circle_outlined, size: 29),
         ),
       ],
